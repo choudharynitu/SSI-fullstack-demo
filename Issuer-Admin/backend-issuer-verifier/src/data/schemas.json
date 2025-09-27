@@ -1,0 +1,151 @@
+[
+  {
+    "$id": "ac1bcaad-c990-4bbe-86b2-152d3d1d3644",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "name": "testSchema1",
+    "description": "testing1",
+    "type": "object",
+    "properties": {
+      "Name": {
+        "type": "string"
+      },
+      "Nationality": {
+        "type": "string"
+      },
+      "Organization": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "Name",
+      "Nationality",
+      "Organization"
+    ]
+  },
+  {
+    "$id": "6497e62d-e4d0-42b4-a5f8-af4aa26f403d",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "name": "ClubMember",
+    "description": "Club Membership",
+    "type": "object",
+    "properties": {
+      "Name": {
+        "type": "string"
+      },
+      "Level": {
+        "type": "string"
+      },
+      "Valid?": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "Name",
+      "Level",
+      "Valid?"
+    ]
+  },
+  {
+    "$id": "8676f225-ab56-4216-b04d-2c1268573995",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "name": "EmployeeBadge",
+    "description": "Employee Badge",
+    "type": "object",
+    "properties": {
+      "Name": {
+        "type": "string"
+      },
+      "Department": {
+        "type": "string"
+      },
+      "Designation": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "Name",
+      "Department",
+      "Designation"
+    ]
+  },
+  {
+    "$id": "b7b6a1aa-1e2a-4b14-bbb4-90d889bc8c9b",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "name": "club Membership",
+    "description": "degree",
+    "type": "object",
+    "properties": {
+      "full name": {
+        "type": "string"
+      },
+      "age": {
+        "type": "number"
+      },
+      "": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "full name",
+      "age",
+      ""
+    ]
+  },
+  {
+    "$id": "096bbc44-b61b-4c66-8e74-91e521028188",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "name": "Test1",
+    "description": "testing",
+    "type": "object",
+    "properties": {
+      "Name": {
+        "type": "string"
+      },
+      "Age": {
+        "type": "number"
+      },
+      "Citizenship": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "Name",
+      "Age",
+      "Citizenship"
+    ]
+  },
+  {
+    "$id": "facafbd4-9f18-4de5-a2b3-eae7ffbbc531",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "name": "DegreeCredential",
+    "description": "Degree schema",
+    "type": "object",
+    "properties": {
+      "degree": {
+        "type": "string"
+      },
+      "university": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "degree",
+      "university"
+    ]
+  },
+  {
+    "$id": "45e9172e-ca55-4504-bcc2-fc4488844feb",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "name": "test",
+    "description": "just testing",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "name"
+    ]
+  }
+]
