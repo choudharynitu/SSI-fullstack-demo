@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Veramo Wallet",
+  "version": "0.2.0",
+  "description": "Self-Sovereign Identity Wallet (OID4VCI)",
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_popup": "ui.html" },
+  "permissions": ["storage", "scripting", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content.js"],
+    "run_at": "document_end"
+  }],
+  "icons": {
+    "16": "public/icon16.png",
+    "48": "public/icon48.png",
+    "128": "public/icon128.png"
+  }
+}
+
+

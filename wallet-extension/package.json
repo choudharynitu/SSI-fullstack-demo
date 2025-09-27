@@ -1,0 +1,26 @@
+{
+  "name": "wallet-extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+       
+    "build": "esbuild src/background.ts --bundle --outfile=dist/background.js --format=esm --platform=browser --inject:./shims.js --external:fs --external:path --external:crypto && esbuild src/content.ts --bundle --outfile=dist/content.js --format=esm --platform=browser --inject:./shims.js --external:fs --external:path --external:crypto && esbuild src/ui/index.tsx --bundle --outfile=dist/ui.js --format=esm --platform=browser --jsx=automatic --inject:./shims.js --external:fs --external:path --external:crypto && cp manifest.json dist && cp ui.html dist && cp icon*.png dist && cp node_modules/sql.js/dist/sql-wasm.wasm dist",
+    "dev": "npm run build && echo 'Load dist/ as unpacked extension'"
+  },
+  "dependencies": {
+    "@noble/ed25519": "^2.1.0",
+    "axios": "^1.7.7",
+    "jose": "^5.9.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sql.js": "^1.10.2"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.295",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/sql.js": "^1.4.9",
+    "esbuild": "^0.24.0"
+  }
+}
