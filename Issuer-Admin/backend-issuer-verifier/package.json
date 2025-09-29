@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node src/index.js",
-    "dev": "tsx src/index.ts"
+    "dev": "tsc && node src/index.js"
   },
   "dependencies": {
     "@cheqd/did-provider-cheqd": "^4.4.1",

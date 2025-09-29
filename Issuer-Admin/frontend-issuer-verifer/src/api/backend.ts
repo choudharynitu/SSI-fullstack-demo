@@ -75,8 +75,11 @@ export const issueCredential = async (credentialData: any) => {
 
 
 export const verifyCredential = async (data: any) => {
-  //const response = await axios.post(`${API_BASE}/credentials/verify`, data);
-  const response = await fetch("http://localhost:8000/api/credentials/verify", data)
+  const response = await fetch("http://localhost:8000/api/credentials/verify", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
   return response.json();
 };
 
@@ -125,5 +128,63 @@ export const getIssuedByHash = async (hash: string) => {
   const res = await fetch(`${API_BASE}/issued/${encodeURIComponent(hash)}`);
   if (!res.ok) throw new Error(await res.text());
   return res.json(); // full VC
+};
+
+// OID4VP Verifier API Functions
+
+export const createPresentationRequest = async (data: {
+  presentation_definition?: any;
+  client_id?: string;
+  redirect_uri?: string;
+  response_mode?: string;
+  response_type?: string;
+  nonce?: string;
+  state?: string;
+}) => {
+  const response = await fetch(`${API_BASE}/oid4vp/presentation-request`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return response.json();
+};
+
+export const createPresentationDefinition = async (data: {
+  credential_types?: string[];
+  required_fields?: string[];
+  trusted_issuers?: string[];
+  purpose?: string;
+}) => {
+  const response = await fetch(`${API_BASE}/oid4vp/create-presentation-definition`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return response.json();
+};
+
+export const getPresentationRequest = async (requestId: string) => {
+  const response = await fetch(`${API_BASE}/oid4vp/request/${requestId}`);
+  return response.json();
+};
+
+export const getVerificationSession = async (sessionId: string) => {
+  const response = await fetch(`${API_BASE}/oid4vp/session/${sessionId}`);
+  return response.json();
+};
+
+export const listPresentationRequests = async () => {
+  const response = await fetch(`${API_BASE}/oid4vp/requests`);
+  return response.json();
+};
+
+export const listVerificationSessions = async () => {
+  const response = await fetch(`${API_BASE}/oid4vp/sessions`);
+  return response.json();
+};
+
+export const oid4vpHealth = async () => {
+  const response = await fetch(`${API_BASE}/oid4vp/health`);
+  return response.json();
 };
 
