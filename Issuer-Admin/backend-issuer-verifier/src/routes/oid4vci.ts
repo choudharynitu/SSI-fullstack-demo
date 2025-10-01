@@ -324,6 +324,43 @@ try {
   res.json({ format: 'jwt_vc', credential: verifiable })
 })
 
+// Debug endpoint to test DID resolution
+router.post('/debug/resolve-did', async (req: Request, res: Response) => {
+  const { did } = req.body
+  if (!did) {
+    return res.status(400).json({ error: 'DID required' })
+  }
+
+  try {
+    console.log(`🔍 Attempting to resolve DID: ${did}`)
+    const resolved = await resolver.resolve(did)
+    console.log(`✅ DID resolved successfully:`, resolved)
+    res.json({ success: true, resolved })
+  } catch (error: any) {
+    console.error(`❌ DID resolution failed:`, error)
+    res.status(400).json({ error: 'DID resolution failed', details: error.message })
+  }
+})
+
+// Debug endpoint to test JWT verification
+router.post('/debug/verify-jwt', async (req: Request, res: Response) => {
+  const { jwt, audience } = req.body
+  if (!jwt) {
+    return res.status(400).json({ error: 'JWT required' })
+  }
+
+  try {
+    console.log(`🔍 Attempting to verify JWT with audience: ${audience || 'none'}`)
+    const base = audience || issuerBaseUrl(req)
+    const verification = await verifyJWT(jwt, { resolver, audience: base })
+    console.log(`✅ JWT verified successfully:`, verification)
+    res.json({ success: true, verification })
+  } catch (error: any) {
+    console.error(`❌ JWT verification failed:`, error)
+    res.status(400).json({ error: 'JWT verification failed', details: error.message })
+  }
+})
+
 export default router
 
 
@@ -452,20 +489,6 @@ router.get('/oid4vci/credential-offer', (req: Request, res: Response) => {
   res.json(credential_offer)
 })
 
-// ----- Token endpoint (pre-authorized code -> access token) -----
-router.post('/oid4vci/token', (req: Request, res: Response) => {
-  const { grant_type, 'pre-authorized_code': preCode, user_pin } = req.body ?? {}
-  if (grant_type !== 'urn:ietf:params:oauth:grant-type:pre-authorized_code') {
-    return res.status(400).json({ error: 'unsupported grant_type' })
-  }
-  const row = db.prepare('SELECT * FROM offers WHERE pre_authorized_code = ?').get(preCode)
-  if (!row) return res.status(400).json({ error: 'invalid pre-authorized_code' })
-  if (row.user_pin && row.user_pin !== user_pin) return res.status(400).json({ error: 'invalid user_pin' })
-
-  const token = nanoid()
-  db.prepare('INSERT INTO tokens (token,offer_id) VALUES (?,?)').run(token, row.id)
-  res.json({ access_token: token, token_type: 'bearer', expires_in: 600 })
-})
 
 // ----- Credential endpoint -----
 router.post('/oid4vci/credential', async (req: Request, res: Response) => {
@@ -502,6 +525,43 @@ router.post('/oid4vci/credential', async (req: Request, res: Response) => {
     format: 'jwt_vc',
     credential: verifiable
   })
+})
+
+// Debug endpoint to test DID resolution
+router.post('/debug/resolve-did', async (req: Request, res: Response) => {
+  const { did } = req.body
+  if (!did) {
+    return res.status(400).json({ error: 'DID required' })
+  }
+
+  try {
+    console.log(`🔍 Attempting to resolve DID: ${did}`)
+    const resolved = await resolver.resolve(did)
+    console.log(`✅ DID resolved successfully:`, resolved)
+    res.json({ success: true, resolved })
+  } catch (error: any) {
+    console.error(`❌ DID resolution failed:`, error)
+    res.status(400).json({ error: 'DID resolution failed', details: error.message })
+  }
+})
+
+// Debug endpoint to test JWT verification
+router.post('/debug/verify-jwt', async (req: Request, res: Response) => {
+  const { jwt, audience } = req.body
+  if (!jwt) {
+    return res.status(400).json({ error: 'JWT required' })
+  }
+
+  try {
+    console.log(`🔍 Attempting to verify JWT with audience: ${audience || 'none'}`)
+    const base = audience || issuerBaseUrl(req)
+    const verification = await verifyJWT(jwt, { resolver, audience: base })
+    console.log(`✅ JWT verified successfully:`, verification)
+    res.json({ success: true, verification })
+  } catch (error: any) {
+    console.error(`❌ JWT verification failed:`, error)
+    res.status(400).json({ error: 'JWT verification failed', details: error.message })
+  }
 })
 
 export default router

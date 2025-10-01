@@ -1,0 +1,54 @@
+{
+  "name": "ssi-wallet-service",
+  "version": "1.0.0",
+  "description": "Complete SSI Wallet Service with OID4VCI and OID4VP support",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node src/index.js",
+    "dev": "tsc && node src/index.js",
+    "test": "node src/test-wallet-flow.js"
+  },
+  "dependencies": {
+    "@veramo/core": "^6.0.0",
+    "@veramo/credential-w3c": "^6.0.0",
+    "@veramo/data-store": "^6.0.0",
+    "@veramo/did-manager": "^6.0.0",
+    "@veramo/did-provider-key": "^6.0.0",
+    "@veramo/did-resolver": "^6.0.0",
+    "@veramo/key-manager": "^6.0.0",
+    "@veramo/kms-local": "^6.0.0",
+    "axios": "^1.6.0",
+    "base64url": "^3.0.1",
+    "better-sqlite3": "^9.6.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "did-jwt": "^8.0.18",
+    "did-jwt-vc": "^4.0.16",
+    "did-resolver": "^4.1.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nanoid": "^5.0.7",
+    "qrcode": "^1.5.3",
+    "typeorm": "^0.3.20"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.12.0",
+    "@types/qrcode": "^1.5.5",
+    "typescript": "^5.7.3"
+  },
+  "keywords": [
+    "SSI",
+    "wallet",
+    "OID4VCI",
+    "OID4VP",
+    "verifiable-credentials",
+    "proof-of-possession",
+    "self-sovereign-identity"
+  ],
+  "license": "MIT"
+}
